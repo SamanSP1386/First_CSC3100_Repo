@@ -9,9 +9,11 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
-  ,
-"workspaces": [
-  "packages/*"
-]
+  "description": "",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
 }
