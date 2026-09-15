@@ -21,11 +21,29 @@ function MyApp() {
       });
   }, []);
 
-  function removeOneCharacter(index) {
-    const updated = characters.filter((character, i) => {
-      return i !== index;
+  function deleteUser(id) {
+    const promise = fetch(`http://localhost:8000/users/${id}`, {
+      method: "DELETE",
     });
-    setCharacters(updated);
+
+    return promise;
+  }
+
+  function removeOneCharacter(id) {
+    deleteUser(id)
+      .then((res) => {
+        if (res.status === 204) {
+          const updated = characters.filter((character) => {
+            return character.id !== id;
+          });
+          setCharacters(updated);
+        } else {
+          throw new Error("Error in deleting user");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   function postUser(person) {
